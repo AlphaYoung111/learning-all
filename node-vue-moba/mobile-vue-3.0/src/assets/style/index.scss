@@ -1,0 +1,188 @@
+@import './const.scss';
+*{
+  box-sizing: border-box;
+  outline: none;
+}
+html{
+  font-size: 13px;
+}
+body{
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.2em;
+  // background: #f1f1f1;
+  background: #eee!important;
+  -webkit-font-smoothing: antialiased;
+}
+a{
+  color: #fff;
+}
+
+
+
+// text
+@each $colorKeys,$color in $colors {
+  .text-#{$colorKeys}{
+    color: $color;
+  }
+  .bg-#{$colorKeys}{
+    background-color: $color;
+  }
+}
+
+// text align
+@each $text in (left,right,center) {
+  .text-#{$text}{
+    text-align: $text;
+  }
+}
+
+
+@each $fontKeys,$font in $font-sizes {
+  .fs-#{$fontKeys}{
+    font-size: $font * $base-font-size;
+  }
+}
+
+// flex
+.d-flex{
+  display: flex;
+}
+.flex-column{
+  flex-direction: column;
+}
+.flex-wrap{
+  flex-wrap: wrap;
+}
+
+
+@each $key,$value in $flex-jc {
+  .jc-#{$key}{
+    justify-content: $value;
+  }
+}
+
+
+
+@each $key,$value in $flex-ai {
+  .ai-#{$key}{
+    align-items: $value;
+  }
+}
+
+.flex-1{
+  flex:1;
+}
+.flex-grow-1{
+  flex-grow: 1;
+}
+
+//spacing
+$spacing-types:(m:margin,p:padding);
+$spacing-direction:(t:top,r:right,b:bottom,l:left);
+$spacing-base-size:1rem;
+$spacing-size:(0:0,1:0.25,2:0.5,3:1,4:1.5,5:3);
+
+@each $typeKey,$type in $spacing-types {
+  //m-1 margin:1rem
+  @each $sizeKey,$size in $spacing-size {
+    .#{$typeKey}-#{$sizeKey}{
+      #{$type}:$size * $spacing-base-size
+    }
+  }
+  // .mx-1 .my-1
+  @each $sizeKey,$size in $spacing-size {
+    .#{$typeKey}x-#{$sizeKey}{
+      #{$type}-left:$size * $spacing-base-size;
+      #{$type}-right:$size * $spacing-base-size;
+    }
+    .#{$typeKey}y-#{$sizeKey}{
+      #{$type}-top:$size * $spacing-base-size;
+      #{$type}-bottom:$size * $spacing-base-size;
+    }
+  }
+  @each $directionKey,$direction in $spacing-direction {
+    @each $sizeKey,$size in $spacing-size {
+      // .mt-1:{margin-top:0.25rem}
+      .#{$typeKey}#{$directionKey}-#{$sizeKey}{
+        #{$type}-#{$direction}:$size * $spacing-base-size
+      }
+    }
+  }
+}
+
+// btn
+.btn{
+  border: none;
+  border-radius: 0.1538rem;
+  font-size: map-get($map: $font-sizes, $key:'sm' ) * $base-font-size;
+  padding: 0.2rem 0.6rem;
+}
+
+// nav
+.nav{
+  display: flex;
+  &.nav-common{
+    .nav-item{
+      border-bottom:3px solid transparent;
+      padding-bottom: 0.2rem;
+      &.active{
+        color: map-get($map: $colors, $key:'primary' );
+        border-bottom-color: map-get($map: $colors, $key:'primary' );
+      }
+    }
+  }
+  &.nav-inverse{
+    .nav-item{
+      color: map-get($map: $colors, $key:'white' );
+      border-bottom:3px solid transparent;
+      &.active{
+        border-bottom:3px  solid map-get($map: $colors, $key:'white' );
+      }
+    }
+
+  }
+}
+
+// width
+.w-100{
+  width:100%;
+}
+.w-20{
+  width: 20%;
+}
+.h-100{
+  height:100%;
+}
+
+// sprite
+.sprite{
+  background:url(../images/index.png) no-repeat 0 0 ;
+  background-size: 28.8462rem;
+  display:inline-block;
+  &.sprite-news{
+    width: 1.7692rem;
+    height: 1.5385rem;
+    background-position: 63.542% 15.517%;
+  }
+  &.sprite-arrow{
+    width: 0.7692rem;
+    height: 0.7692rem;
+    background-position: 38.577% 52.076%;
+  }
+}
+// borders
+@each $dir in (top, right, bottom, left) {
+  .border-#{$dir} {
+    border-#{$dir}: 1px solid $border-color;
+  }
+}
+
+// text-one
+.text-one{
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+
+}

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">{{title}}</div>
+    <script src="./reactive.js"></script>
+    <script>
+      const { createApp } = Vue
+      const app = createApp({
+        data() {
+          return {
+            title: 'options title',
+          }
+        },
+        setup() {
+          const state = reactive({
+            title: '我是标题',
+          })
+          setTimeout(() => {
+            state.title = 'xxxx'
+          }, 2000)
+          return state
+        },
+      })
+
+      app.mount('#app')
+    </script>
+  </body>
+</html>
